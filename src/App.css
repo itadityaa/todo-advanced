@@ -1,0 +1,13 @@
+:root {
+    --header-font: "Playwrite PE", cursive;
+    --body-font: "Lekton", monospace;
+  }
+
+.header-font{ 
+    font-family: var(--header-font);
+  }   
+  
+.body-font{
+    font-family: var(--body-font);
+  }
+  
