@@ -1,51 +1,31 @@
-import React, { useState, ChangeEvent, KeyboardEvent, FormEvent } from 'react';
+import React, { useState } from 'react';
 
 interface AddTagProps {
   onAddTag: (tag: string) => void;
 }
 
 const AddTag: React.FC<AddTagProps> = ({ onAddTag }) => {
-  const [newTag, setNewTag] = useState<string>("");
+  const [tagName, setTagName] = useState('');
 
-  const handleCapitalize = (tag: string): string => {
-    return tag.charAt(0).toUpperCase() + tag.slice(1);
-  };
-
-  const handleAddTag = (e: FormEvent<HTMLButtonElement> | KeyboardEvent<HTMLInputElement>): void => {
+  const handleAddTag = (e: React.FormEvent) => {
     e.preventDefault();
-    if (newTag.trim() !== "") {
-      onAddTag(handleCapitalize(newTag.trim()));
-      setNewTag("");
+    if (tagName.trim()) {
+      onAddTag(tagName.trim());
+      setTagName('');
     }
   };
 
-  const handleChange = (e: ChangeEvent<HTMLInputElement>): void => {
-    setNewTag(e.target.value);
-  };
-
   return (
-    <>
+    <div className='flex items-center'>
       <input
-        type="text"
-        placeholder="Add a New Tag"
-        value={newTag}
-        onChange={handleChange}
-        onKeyDown={(e) => {
-          if (e.key === "Enter") {
-            e.preventDefault();
-            handleAddTag(e);
-          }
-        }}
-        className="p-2 m-2 border rounded-lg border-[#023e8a] bg-inherit placeholder-black"
+        type='text'
+        value={tagName}
+        onChange={(e) => setTagName(e.target.value)}
+        placeholder='New Tag'
+        className='p-2 m-1 border border-[#023e8a] rounded-lg bg-inherit placeholder-black'
       />
-      <button
-        disabled={newTag.trim() === ""}
-        onClick={handleAddTag}
-        className="m-2 p-2 border border-[#023e8a] rounded-lg"
-      >
-        Add Tag
-      </button>
-    </>
+      <button onClick={handleAddTag} className='p-2 m-2 bg-[#a3cef1] rounded-lg'>Add</button>
+    </div>
   );
 };
 

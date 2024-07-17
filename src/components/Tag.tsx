@@ -2,18 +2,20 @@ import React from 'react';
 
 interface TagProps {
   tag: string;
-  onRemove?: (tag: string) => void;
+  selectTag: (tag: string) => void;
+  isSelected: boolean;
 }
 
-const Tag: React.FC<TagProps> = ({ tag, onRemove }) => {
+const Tag: React.FC<TagProps> = ({ tag, selectTag, isSelected }) => {
   return (
-    <button
-      className="m-2 p-2 border rounded-lg border-[#023e8a]"
-    //   onClick={() => onRemove(tag)}
+    <div
+      className={`p-2 m-1 border ${isSelected ? 'border-[#023e8a] bg-[#a3cef1]' : 'border-[#023e8a]'} rounded-lg cursor-pointer`}
+      onClick={() => selectTag(tag)}
     >
       {tag}
-    </button>
+    </div>
   );
 };
 
 export default Tag;
+
