@@ -53,7 +53,7 @@ Ensure you have the following installed:
     yarn dev
     ```
 
-    This will start the development server and open the application in your default browser at `http://localhost:3000`.
+    This will start the development server and open the application in your default browser at `http://localhost:5173`.
 
 ### Building for Production
 
