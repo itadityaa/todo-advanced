@@ -14,15 +14,12 @@ interface Task {
 }
 
 const oldTasks = localStorage.getItem('tasks');
-console.log(oldTasks);
 
 const App: React.FC = () => {
   const [tasks, setTasks] = useState<Task[]>(oldTasks ? JSON.parse(oldTasks) : []);
 
   useEffect(() => {
-    if (oldTasks) {
-      localStorage.setItem('tasks', JSON.stringify(tasks));
-    }
+    localStorage.setItem('tasks', JSON.stringify(tasks));
   }, [tasks]);
 
   const handleDeleteTask = (taskIndex: number) => {
