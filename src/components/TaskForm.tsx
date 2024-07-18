@@ -12,7 +12,7 @@ interface TaskFormState {
 
 const predefinedTags = ['HTML 5', 'CSS 3', 'TypeScript', 'React'];
 
-const TaskForm = () => {
+const TaskForm = ({setTasks}) => {
   const [formState, setFormState] = useState<TaskFormState>({
     taskName: '',
     description: '',
@@ -52,7 +52,17 @@ const TaskForm = () => {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     // Handle form submission
-    console.log(formState);
+    setTasks(prevTasks => [
+      ...prevTasks,
+    formState,
+    ]); 
+    setFormState({
+      taskName: '',
+      description: '',
+      priority: '',
+      status: '',
+      tags: [],
+    });
   };
 
   return (
@@ -65,6 +75,7 @@ const TaskForm = () => {
           className='p-2 m-1 border border-[#023e8a] rounded-lg bg-inherit placeholder-black'
           value={taskName}
           onChange={handleInputChange}
+          required
         />
         <input 
           type='text' 
@@ -73,6 +84,7 @@ const TaskForm = () => {
           className='p-2 m-1 border border-[#023e8a] rounded-lg bg-inherit placeholder-black'
           value={description}
           onChange={handleInputChange}
+          required
         />
       </section>
       <section className='flex justify-between'>
@@ -91,6 +103,7 @@ const TaskForm = () => {
             className='p-2 m-2 border border-[#023e8a] rounded-lg placeholder-black bg-inherit'
             value={priority}
             onChange={handleInputChange}
+            required
           >
             <option value=''>Select Priority</option>
             <option value='Low'>Low</option>
@@ -102,6 +115,7 @@ const TaskForm = () => {
             className='p-2 m-2 border border-[#023e8a] rounded-lg placeholder-black bg-inherit'
             value={status}
             onChange={handleInputChange}
+            required
           >
             <option value=''>Select Status</option>
             <option value='To Do'>To Do</option>
